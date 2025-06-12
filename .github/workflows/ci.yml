@@ -28,6 +28,8 @@ jobs:
       run: pip install pre-commit
 
     - name: Run pre-commit
+      env:
+        GITGUARDIAN_API_KEY: ${{ secrets.GIT_GUARDIAN_API_KEY }}
       run: pre-commit run --all-files
 
   build:

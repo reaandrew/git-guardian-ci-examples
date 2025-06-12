@@ -8,6 +8,7 @@ Examples and configurations for integrating Git Guardian secret detection into v
 
 ## Features
 
+- **Git Guardian Secret Scanning**: Prevents secrets from being committed using ggshield pre-commit hooks
 - **Conventional Commits**: Enforced using pre-commit hooks to ensure consistent commit message format
 - **Pre-commit Hooks**: Automated code quality checks before commits
 - **GitHub Actions CI**: Automated validation on push and pull requests
@@ -32,7 +33,25 @@ pre-commit install
 pre-commit install --hook-type commit-msg
 ```
 
-> **Note**: Always activate the virtual environment (`source venv/bin/activate`) when working with this repository to ensure you have the correct pre-commit installation.
+### Git Guardian Setup
+
+For Git Guardian secret scanning to work locally, you need to:
+
+1. **Get a Git Guardian API key** from [GitGuardian Dashboard](https://dashboard.gitguardian.com/)
+2. **Set the environment variable**:
+   ```bash
+   export GITGUARDIAN_API_KEY=your_api_key_here
+   ```
+3. **Add to your shell profile** (optional, for persistence):
+   ```bash
+   echo 'export GITGUARDIAN_API_KEY=your_api_key_here' >> ~/.bashrc
+   # or ~/.zshrc if using zsh
+   ```
+
+> **Note**:
+> - Always activate the virtual environment (`source venv/bin/activate`) when working with this repository
+> - The Git Guardian API key is automatically available in CI/CD through the `GIT_GUARDIAN_API_KEY` repository secret
+> - Local commits will be blocked if secrets are detected, even without the API key, but with reduced detection capabilities
 
 ## Conventional Commits
 
