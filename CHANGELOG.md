@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/reaandrew/acronymcreator/compare/v1.2.0...v1.2.1) (2025-06-12)
+
+### Bug Fixes
+
+* correct pytest config section header and remove test code ([85c0a2c](https://github.com/reaandrew/acronymcreator/commit/85c0a2c1c9df3f265e5a462838753cc7b8eb940d))
+* prevent pytest coverage from creating files in pre-commit ([ac033cc](https://github.com/reaandrew/acronymcreator/commit/ac033cc555529c3f2a03fd8a1f263ee40d73351f))
+* prevent pytest from creating cache files during pre-commit ([40f148d](https://github.com/reaandrew/acronymcreator/commit/40f148d651d8960094236e6a51c5309914f54965))
+* use .coveragerc to properly redirect coverage data file ([e0bbfbc](https://github.com/reaandrew/acronymcreator/commit/e0bbfbc08b373b3bbae22efb642e2dfd6a814ad4))
+
 ## [1.2.0](https://github.com/reaandrew/acronymcreator/compare/v1.1.0...v1.2.0) (2025-06-12)
 
 ### Features
