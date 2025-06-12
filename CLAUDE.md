@@ -81,3 +81,5 @@ This repository enforces conventional commit format via pre-commit hooks:
 - `feat:` `fix:` `docs:` `style:` `refactor:` `test:` `build:` `ci:` `chore:` `revert:`
 
 Commits that don't follow this format will be rejected by the commit-msg hook.
+
+Commit messages must only contain content which is relevant to the changes made
