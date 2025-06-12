@@ -1,3 +1,18 @@
+## [1.2.0](https://github.com/reaandrew/acronymcreator/compare/v1.1.0...v1.2.0) (2025-06-12)
+
+### Features
+
+* add complete Python package structure and CLI ([d7c4cd4](https://github.com/reaandrew/acronymcreator/commit/d7c4cd4e888c1466c09c1c377c9fc90801d04386))
+* add detailed SonarCloud quality gate status reporting ([add571c](https://github.com/reaandrew/acronymcreator/commit/add571c920b28ba3a72fe943a79c8872582a7cf5))
+* implement article filtering for acronym generation ([2f96c4f](https://github.com/reaandrew/acronymcreator/commit/2f96c4fd5de000148e14e4252812896ee734e490))
+
+### Bug Fixes
+
+* configure pytest pre-commit hook for CI compatibility ([58f9331](https://github.com/reaandrew/acronymcreator/commit/58f9331d5095a3e3cc932217b08b38ce4ab48d55))
+* configure pytest pre-commit hook to show Passed when coverage is good ([d8e33d3](https://github.com/reaandrew/acronymcreator/commit/d8e33d345aece8962c291567a5ddc49a83ca10b5))
+* install project dependencies including click in CI ([ba87333](https://github.com/reaandrew/acronymcreator/commit/ba873333da38f8d08652c993f75dd1a366e7f7e6))
+* update repository URL in semantic-release config ([6ea0983](https://github.com/reaandrew/acronymcreator/commit/6ea0983e33462a10ed3ca0c1c139040062d3301b))
+
 ## [1.1.0](https://github.com/reaandrew/git-guardian-ci-examples/compare/v1.0.1...v1.1.0) (2025-06-12)
 
 ### Features
