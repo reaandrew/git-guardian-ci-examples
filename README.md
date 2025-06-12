@@ -85,3 +85,7 @@ This repository uses [semantic-release](https://semantic-release.gitbook.io/) fo
   - Updates the version in `package.json`
 
 - **Starting Version**: The first release will be `v0.1.0`
+
+## Demonstrating Guard Rails    
+
+This line has trailing whitespace to demonstrate lint failures in CI.
