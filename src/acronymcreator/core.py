@@ -1,5 +1,5 @@
 """
-Core functionality for the Acronym Creator.
+Core functionality for AcronymCreator.
 """
 
 from dataclasses import dataclass

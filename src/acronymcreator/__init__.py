@@ -1,5 +1,5 @@
 """
-Acronym Creator - A CLI tool for generating acronyms from phrases.
+AcronymCreator - A CLI tool for generating acronyms from phrases.
 """
 
 __version__ = "0.1.0"

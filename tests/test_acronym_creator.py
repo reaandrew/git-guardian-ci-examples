@@ -3,7 +3,7 @@ Tests for the Acronym Creator application.
 """
 
 import pytest
-from src.acronym_creator.core import AcronymCreator, AcronymOptions
+from src.acronymcreator.core import AcronymCreator, AcronymOptions
 
 
 class TestAcronymCreator:
