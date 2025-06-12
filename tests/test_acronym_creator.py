@@ -124,13 +124,13 @@ class TestAcronymCreator:
         results = self.creator.generate_multiple_options(phrase, count=2)
 
         # Check that all expected keys are present
-        assert 'basic' in results
-        assert 'with_articles' in results
-        assert 'creative' in results
-        assert 'syllable' in results
+        assert "basic" in results
+        assert "with_articles" in results
+        assert "creative" in results
+        assert "syllable" in results
 
         # Check basic acronym (should exclude 'The')
-        assert 'QBF' in results['basic']
+        assert "QBF" in results["basic"]
 
         # Check with articles (should include 'The')
-        assert 'TQBF' in results['with_articles']
+        assert "TQBF" in results["with_articles"]

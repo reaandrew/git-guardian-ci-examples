@@ -9,6 +9,7 @@ from typing import Optional
 @dataclass
 class AcronymOptions:
     """Configuration options for acronym generation."""
+
     include_articles: bool = False
     min_word_length: int = 2
     max_words: Optional[int] = None
@@ -20,8 +21,26 @@ class AcronymCreator:
 
     # Common articles and prepositions to potentially exclude
     COMMON_WORDS = {
-        'a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
-        'of', 'with', 'by', 'from', 'up', 'about', 'into', 'through', 'during'
+        "a",
+        "an",
+        "the",
+        "and",
+        "or",
+        "but",
+        "in",
+        "on",
+        "at",
+        "to",
+        "for",
+        "of",
+        "with",
+        "by",
+        "from",
+        "up",
+        "about",
+        "into",
+        "through",
+        "during",
     }
 
     def create_basic_acronym(self, phrase: str, options: AcronymOptions) -> str:
@@ -35,7 +54,7 @@ class AcronymCreator:
         if not options.include_articles:
             words = [word for word in words if word.lower() not in self.COMMON_WORDS]
 
-        acronym = ''.join(word[0] for word in words)
+        acronym = "".join(word[0] for word in words)
 
         if options.force_uppercase:
             acronym = acronym.upper()
