@@ -28,7 +28,7 @@ repos:
     hooks:
       - id: pytest
         name: Run tests with coverage
-        entry: python -m pytest -c pytest-precommit.ini
+        entry: python -B -m pytest -c pytest-precommit.ini -p no:cacheprovider
         language: python
         pass_filenames: false
         always_run: true
