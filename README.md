@@ -17,6 +17,10 @@ Examples and configurations for integrating Git Guardian secret detection into v
 To set up the pre-commit hooks locally:
 
 ```bash
+# Create and activate a Python virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
 # Install pre-commit
 pip install pre-commit
 
@@ -26,6 +30,8 @@ pre-commit install
 # Install the commit-msg hook for conventional commits
 pre-commit install --hook-type commit-msg
 ```
+
+> **Note**: Always activate the virtual environment (`source venv/bin/activate`) when working with this repository to ensure you have the correct pre-commit installation.
 
 ## Conventional Commits
 
