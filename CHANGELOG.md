@@ -1,3 +1,9 @@
+## [1.2.2](https://github.com/reaandrew/acronymcreator/compare/v1.2.1...v1.2.2) (2025-06-12)
+
+### Bug Fixes
+
+* configure Flake8 line length to match Black (88 chars) ([3d07c41](https://github.com/reaandrew/acronymcreator/commit/3d07c41234b2ceb00fca86c063e978547a770f6d))
+
 ## [1.2.1](https://github.com/reaandrew/acronymcreator/compare/v1.2.0...v1.2.1) (2025-06-12)
 
 ### Bug Fixes
