@@ -20,7 +20,6 @@ class TestAcronymCreator:
         result = self.creator.create_basic_acronym(phrase, options)
         assert result == "HW"
 
-    @pytest.mark.skip(reason="Article filtering not implemented yet")
     def test_create_basic_acronym_with_articles(self):
         """Test acronym creation excluding articles by default."""
         phrase = "The Quick Brown Fox"
