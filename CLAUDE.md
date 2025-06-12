@@ -27,6 +27,9 @@ pre-commit install --hook-type commit-msg
 # ALWAYS activate virtual environment first
 source venv/bin/activate
 
+# Install project dependencies including dev tools
+pip install -e ".[dev]"
+
 # Run all pre-commit hooks on all files
 pre-commit run --all-files
 
@@ -35,6 +38,12 @@ ggshield secret scan pre-commit
 
 # Run conventional commit validation
 pre-commit run conventional-pre-commit --hook-stage commit-msg
+
+# Run tests with coverage manually
+python -m pytest --cov=src --cov-report=term-missing --cov-fail-under=80
+
+# Run only the coverage test hook
+pre-commit run pytest --all-files
 ```
 
 ### Release Process
@@ -46,10 +55,11 @@ pre-commit run conventional-pre-commit --hook-stage commit-msg
 
 ### Core Components
 
-**Security Pipeline**: Three-layer secret detection
+**Security Pipeline**: Multi-layer validation
 1. **Local pre-commit**: GitGuardian ggshield scanning before commits
-2. **CI pre-commit job**: Re-runs all hooks including GitGuardian
-3. **Conventional commits**: Enforced format for automated versioning
+2. **Test coverage enforcement**: Blocks commits with <80% code coverage
+3. **CI pre-commit job**: Re-runs all hooks including GitGuardian and tests
+4. **Conventional commits**: Enforced format for automated versioning
 
 **CI/CD Workflow**: Four sequential jobs
 1. **lint-and-test**: Runs all quality checks, secret scanning, and tests with coverage
@@ -64,7 +74,9 @@ pre-commit run conventional-pre-commit --hook-stage commit-msg
 
 ### Key Configuration Files
 
-- `.pre-commit-config.yaml`: Defines all pre-commit hooks including GitGuardian
+- `.pre-commit-config.yaml`: Defines all pre-commit hooks including GitGuardian and pytest
+- `pytest-precommit.ini`: Pytest configuration for coverage enforcement (80% threshold)
+- `pyproject.toml`: Main project configuration with dependencies and test settings
 - `.releaserc.json`: Semantic-release configuration for automated versioning
 - `.github/workflows/ci.yml`: Complete CI/CD pipeline definition
 - `sonar-project.properties`: SonarCloud analysis configuration
@@ -77,6 +89,62 @@ pre-commit run conventional-pre-commit --hook-stage commit-msg
 - `SONAR_TOKEN`: GitHub secret for SonarCloud integration
 
 **Python Environment**: Always activate the virtual environment (`source venv/bin/activate`) when working locally.
+
+## Test Coverage Enforcement
+
+This repository enforces a minimum 80% test coverage threshold at multiple levels:
+
+### Pre-commit Coverage Validation
+
+The pre-commit hook automatically runs tests with coverage and blocks commits that fall below 80%:
+
+```bash
+# Hook configuration uses:
+python -B -m pytest -c pytest-precommit.ini -p no:cacheprovider
+
+# Key features:
+- Uses pytest-precommit.ini for clean configuration
+- Generates no cache files (prevents "files modified" errors)
+- Stores coverage data in /tmp to avoid working tree modifications
+- Fails fast on insufficient coverage
+```
+
+### Coverage Configuration
+
+**pytest-precommit.ini**:
+- `[pytest]` section header (required for .ini files)
+- `addopts = --cov=src --cov-report=term-missing --cov-fail-under=80`
+- `data_file = /tmp/.coverage_precommit` (prevents file conflicts)
+
+**pyproject.toml**:
+- Main coverage settings with `fail_under = 80`
+- Excludes common patterns (pragma: no cover, __repr__, etc.)
+- Generates HTML and XML reports for CI analysis
+
+### Testing Commands
+
+```bash
+# Run tests with coverage (local development)
+python -m pytest --cov=src --cov-report=term-missing --cov-fail-under=80
+
+# Test the pre-commit hook specifically
+pre-commit run pytest --all-files
+
+# Run all pre-commit hooks (includes coverage check)
+pre-commit run --all-files
+```
+
+### Coverage Troubleshooting
+
+**Common Issues**:
+- **Low coverage**: Add tests for uncovered code paths
+- **Hook shows "Passed" but CI fails**: Check for file generation conflicts
+- **"Files modified" error**: Ensure `-B` flag and `-p no:cacheprovider` are used
+
+**Coverage Requirements**:
+- Minimum 80% total coverage required for commits
+- Branch coverage enabled for comprehensive testing
+- Both local pre-commit and CI enforce the same threshold
 
 ## SonarCloud Quality Gate Troubleshooting
 
