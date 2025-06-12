@@ -11,6 +11,7 @@ Examples and configurations for integrating Git Guardian secret detection into v
 - **Conventional Commits**: Enforced using pre-commit hooks to ensure consistent commit message format
 - **Pre-commit Hooks**: Automated code quality checks before commits
 - **GitHub Actions CI**: Automated validation on push and pull requests
+- **Semantic Versioning**: Automatic version tagging and changelog generation based on conventional commits
 
 ## Setup
 
@@ -46,3 +47,22 @@ This repository enforces conventional commit format:
 - `ci:` for CI configuration changes
 - `chore:` for maintenance tasks
 - `revert:` for reverting changes
+
+## Versioning and Releases
+
+This repository uses [semantic-release](https://semantic-release.gitbook.io/) for automatic versioning and releases:
+
+- **Version Bumps**: Based on conventional commit types:
+  - `feat:` → Minor version bump (0.1.0 → 0.2.0)
+  - `fix:` → Patch version bump (0.1.0 → 0.1.1)
+  - `feat!:` or `BREAKING CHANGE:` → Major version bump (0.1.0 → 1.0.0)
+  - `docs:`, `style:`, `refactor:`, `test:`, `build:`, `ci:`, `chore:` → No version bump
+
+- **Automatic Release**: Every push to `main` triggers semantic-release which:
+  - Analyzes commits since the last release
+  - Determines the next version number
+  - Generates a changelog
+  - Creates a GitHub release with git tag
+  - Updates the version in `package.json`
+
+- **Starting Version**: The first release will be `v0.1.0`
