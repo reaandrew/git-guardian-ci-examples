@@ -75,7 +75,8 @@ pre-commit run pytest --all-files
 ### Key Configuration Files
 
 - `.pre-commit-config.yaml`: Defines all pre-commit hooks including GitGuardian and pytest
-- `pytest-precommit.ini`: Pytest configuration for coverage enforcement (80% threshold)
+- `pytest-precommit.ini`: Pytest configuration for test execution
+- `.coveragerc`: Coverage.py configuration with 80% threshold and temp file redirection
 - `pyproject.toml`: Main project configuration with dependencies and test settings
 - `.releaserc.json`: Semantic-release configuration for automated versioning
 - `.github/workflows/ci.yml`: Complete CI/CD pipeline definition
@@ -111,15 +112,20 @@ python -B -m pytest -c pytest-precommit.ini -p no:cacheprovider
 
 ### Coverage Configuration
 
+**.coveragerc**:
+- `data_file = /tmp/.coverage_precommit` (prevents repo file modifications)
+- `fail_under = 80` (enforces minimum coverage threshold)
+- `source = src` and `branch = true` for comprehensive coverage
+- Excludes common patterns (pragma: no cover, __repr__, etc.)
+
 **pytest-precommit.ini**:
 - `[pytest]` section header (required for .ini files)
 - `addopts = --cov=src --cov-report=term-missing --cov-fail-under=80`
-- `data_file = /tmp/.coverage_precommit` (prevents file conflicts)
+- Simplified since coverage.py reads configuration from .coveragerc
 
 **pyproject.toml**:
-- Main coverage settings with `fail_under = 80`
-- Excludes common patterns (pragma: no cover, __repr__, etc.)
-- Generates HTML and XML reports for CI analysis
+- Main project dependencies and test settings
+- Alternative location for coverage config (uses `[tool.coverage.run]` section)
 
 ### Testing Commands
 
@@ -138,8 +144,8 @@ pre-commit run --all-files
 
 **Common Issues**:
 - **Low coverage**: Add tests for uncovered code paths
-- **Hook shows "Passed" but CI fails**: Check for file generation conflicts
-- **"Files modified" error**: Ensure `-B` flag and `-p no:cacheprovider` are used
+- **"Files modified" error**: Coverage.py only reads config from .coveragerc, setup.cfg, or pyproject.toml
+- **CI vs local differences**: Ensure .coveragerc data_file redirects to /tmp to avoid repo modifications
 
 **Coverage Requirements**:
 - Minimum 80% total coverage required for commits
