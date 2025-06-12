@@ -1,0 +1,2 @@
+[console_scripts]
+acronymcreator = acronymcreator.cli:main
