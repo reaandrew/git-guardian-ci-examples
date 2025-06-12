@@ -86,6 +86,6 @@ This repository uses [semantic-release](https://semantic-release.gitbook.io/) fo
 
 - **Starting Version**: The first release will be `v0.1.0`
 
-## Demonstrating Guard Rails    
+## Demonstrating Guard Rails
 
-This line has trailing whitespace to demonstrate lint failures in CI.
+This line demonstrates how CI catches issues that bypass local checks.
