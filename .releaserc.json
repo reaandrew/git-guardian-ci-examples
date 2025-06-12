@@ -29,5 +29,5 @@
     "@semantic-release/github"
   ],
   "tagFormat": "v${version}",
-  "repositoryUrl": "https://github.com/reaandrew/git-guardian-ci-examples.git"
+  "repositoryUrl": "https://github.com/reaandrew/acronymcreator.git"
 }
