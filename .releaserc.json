@@ -1,8 +1,18 @@
 {
   "branches": ["main"],
   "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
     [
       "@semantic-release/changelog",
       {
@@ -18,7 +28,6 @@
     ],
     "@semantic-release/github"
   ],
-  "preset": "conventionalcommits",
   "tagFormat": "v${version}",
   "repositoryUrl": "https://github.com/reaandrew/git-guardian-ci-examples.git"
 }
