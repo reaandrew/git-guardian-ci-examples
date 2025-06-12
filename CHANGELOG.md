@@ -1,3 +1,14 @@
+## [1.1.0](https://github.com/reaandrew/git-guardian-ci-examples/compare/v1.0.1...v1.1.0) (2025-06-12)
+
+### Features
+
+* add initial acronym creator with basic functionality ([c68b2e0](https://github.com/reaandrew/git-guardian-ci-examples/commit/c68b2e08a675e563dcdc89394f2b177ee4ccad37))
+* add SonarCloud analysis with improved CI stage naming ([b0fbb39](https://github.com/reaandrew/git-guardian-ci-examples/commit/b0fbb397d1aa46422981d4fadedc209dacffb986))
+
+### Bug Fixes
+
+* remove trailing whitespace from README ([9e49825](https://github.com/reaandrew/git-guardian-ci-examples/commit/9e49825a0043412bbede68a13a2080c55640597c))
+
 ## [1.0.1](https://github.com/reaandrew/git-guardian-ci-examples/compare/v1.0.0...v1.0.1) (2025-06-12)
 
 ### Bug Fixes
