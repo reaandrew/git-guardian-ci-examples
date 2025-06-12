@@ -15,3 +15,4 @@ src/acronymcreator.egg-info/requires.txt
 src/acronymcreator.egg-info/top_level.txt
 tests/__init__.py
 tests/test_acronym_creator.py
+tests/test_cli.py

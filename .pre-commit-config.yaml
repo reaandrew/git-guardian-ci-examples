@@ -28,9 +28,10 @@ repos:
     hooks:
       - id: pytest
         name: Run tests with coverage
-        entry: bash -c 'source venv/bin/activate && COVERAGE_FILE=/tmp/.coverage_precommit python -m pytest --override-ini="addopts=--cov=src --cov-report=term-missing --cov-fail-under=80"'
-        language: system
+        entry: python -m pytest -c pytest-precommit.ini
+        language: python
         pass_filenames: false
         always_run: true
         files: '^(src/|tests/)'
         types: [python]
+        additional_dependencies: [pytest>=8.0.0, pytest-cov>=6.0.0, click>=8.0.0]

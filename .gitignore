@@ -19,3 +19,14 @@ Thumbs.db
 
 # Pre-commit cache
 .pre-commit-cache/
+
+# Build and distribution files
+build/
+dist/
+*.egg-info/
+SOURCES.txt
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
