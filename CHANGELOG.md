@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/reaandrew/git-guardian-ci-examples/compare/v1.0.0...v1.0.1) (2025-06-12)
+
+### Bug Fixes
+
+* update pre-commit hooks to resolve deprecation warnings ([a5c9773](https://github.com/reaandrew/git-guardian-ci-examples/commit/a5c9773daddcbfa6108d2f9a09fc8accca70ec9a))
+
 ## 1.0.0 (2025-06-12)
 
 ### Features
