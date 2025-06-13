@@ -89,7 +89,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          -Dsonar.qualitygate.wait=false
+          -Dsonar.qualitygate.wait=true
           -Dsonar.python.coverage.reportPaths=coverage.xml
 
     - name: Check Quality Gate Status
@@ -121,7 +121,11 @@ jobs:
         gate_status=$(echo "$response" | jq -r .projectStatus.status)
         echo "Quality Gate Status: $gate_status"
 
-        if [ "$gate_status" != "OK" ]; then
+        if [ "$gate_status" = "null" ] || [ -z "$gate_status" ]; then
+          echo "Quality Gate status is null or empty. Analysis may not be complete."
+          echo "Response: $response"
+          exit 1
+        elif [ "$gate_status" != "OK" ]; then
           echo "Quality Gate failed for the following reasons:"
           echo "$response" | jq -r '.projectStatus.conditions[] | select(.status=="ERROR") | "- \(.metricKey): \(.actualValue) \(.comparator) \(.errorThreshold)"'
           exit 1
