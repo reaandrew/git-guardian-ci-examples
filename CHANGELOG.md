@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/reaandrew/acronymcreator/compare/v1.2.2...v1.3.0) (2025-06-13)
+
+### Features
+
+* integrate Semgrep security analysis into CI pipeline ([8cfb990](https://github.com/reaandrew/acronymcreator/commit/8cfb990d3ef0e8c21bbf2bd8f215d57f62f1cf5d))
+
 ## [1.2.2](https://github.com/reaandrew/acronymcreator/compare/v1.2.1...v1.2.2) (2025-06-12)
 
 ### Bug Fixes
