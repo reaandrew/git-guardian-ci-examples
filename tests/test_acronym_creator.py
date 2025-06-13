@@ -2,7 +2,6 @@
 Tests for the Acronym Creator application.
 """
 
-import pytest
 from src.acronymcreator.core import AcronymCreator, AcronymOptions
 
 
@@ -109,7 +108,6 @@ class TestAcronymCreator:
         result = self.creator.create_syllable_acronym(phrase, options)
         assert result == "PYPRLAN"  # Py-Pr-Lan based on syllable logic
 
-    @pytest.mark.skip(reason="Multiple options generation not implemented yet")
     def test_generate_multiple_options(self):
         """Test generation of multiple acronym options."""
         phrase = "The Quick Brown Fox"

@@ -130,3 +130,48 @@ class AcronymCreator:
             acronym = acronym.upper()
 
         return acronym
+
+    def generate_multiple_options(self, phrase: str, count: int = 4) -> dict:
+        """Generate multiple acronym options using different strategies."""
+        if not phrase.strip():
+            return {"basic": [], "with_articles": [], "creative": [], "syllable": []}
+
+        results = {}
+
+        # Basic acronym (excludes articles)
+        basic_options = AcronymOptions(include_articles=False)
+        basic_result = self.create_basic_acronym(phrase, basic_options)
+        results["basic"] = [basic_result] if basic_result else []
+
+        # With articles
+        with_articles_options = AcronymOptions(include_articles=True)
+        with_articles_result = self.create_basic_acronym(phrase, with_articles_options)
+        results["with_articles"] = (
+            [with_articles_result] if with_articles_result else []
+        )
+
+        # Creative variations (different word limits, case options)
+        creative_results = []
+        if basic_result:
+            # Lowercase version
+            lowercase_options = AcronymOptions(
+                include_articles=False, force_uppercase=False
+            )
+            lowercase_result = self.create_basic_acronym(phrase, lowercase_options)
+            if lowercase_result.lower() != basic_result.lower():
+                creative_results.append(lowercase_result)
+
+            # Limited words version
+            limited_options = AcronymOptions(include_articles=False, max_words=3)
+            limited_result = self.create_basic_acronym(phrase, limited_options)
+            if limited_result and limited_result != basic_result:
+                creative_results.append(limited_result)
+
+        results["creative"] = creative_results
+
+        # Syllable-based
+        syllable_options = AcronymOptions(include_articles=False)
+        syllable_result = self.create_syllable_acronym(phrase, syllable_options)
+        results["syllable"] = [syllable_result] if syllable_result else []
+
+        return results
