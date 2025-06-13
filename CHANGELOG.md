@@ -1,3 +1,9 @@
+## [1.5.2](https://github.com/reaandrew/acronymcreator/compare/v1.5.1...v1.5.2) (2025-06-13)
+
+### Bug Fixes
+
+* align SonarCloud source analysis with local coverage scope ([46bfe88](https://github.com/reaandrew/acronymcreator/commit/46bfe8891d52bef7253238497698feeb16b391d3))
+
 ## [1.5.1](https://github.com/reaandrew/acronymcreator/compare/v1.5.0...v1.5.1) (2025-06-13)
 
 ### Bug Fixes
