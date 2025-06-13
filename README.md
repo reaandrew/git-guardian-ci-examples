@@ -14,18 +14,30 @@ The project includes a functional acronym generation CLI built with Click and co
 
 ## Features
 
-### 🔒 Security & Quality Controls
-- **GitGuardian Secret Scanning**: Three-layer protection (local pre-commit, CI, and SonarCloud)
-- **Test Coverage Enforcement**: Commits blocked if coverage drops below 80%
-- **Code Quality Gates**: SonarCloud analysis with quality gate enforcement
-- **Conventional Commits**: Automated commit message validation
-- **Automated Dependency Scanning**: Pre-commit hooks for security validation
+### 🔒 Comprehensive Security & Quality Guardrails
 
-### 🚀 CI/CD Pipeline
-- **Four-stage pipeline**: lint-and-test → sonarcloud → build → release
-- **Semantic Versioning**: Automatic version bumps based on conventional commits
-- **GitHub Releases**: Automated changelog generation and release publishing
-- **Quality Gates**: Pipeline fails if any quality standard is not met
+#### Multi-Layer Secret Protection
+- **Pre-commit GitGuardian**: Scans staged changes before commits
+- **CI Repository History Scan**: Scans entire git history for secrets
+- **Blocks pipeline on detection**: Prevents secrets from reaching production
+
+#### Code Quality Enforcement
+- **Black Code Formatting**: Consistent Python code style
+- **Flake8 Linting**: PEP 8 compliance and code quality checks
+- **Test Coverage**: 80% minimum threshold enforced at commit and CI
+- **SonarCloud Analysis**: Code quality, security, and technical debt assessment
+
+#### Commit Standards
+- **Conventional Commits**: Enforced format for automated versioning
+- **Pre-commit Validation**: All quality checks run before commit acceptance
+- **CI Re-validation**: Clean environment re-runs of all quality checks
+
+### 🚀 Five-Stage CI/CD Pipeline
+1. **Lint and Test**: Pre-commit hooks + comprehensive testing
+2. **GitGuardian History Scan**: Full repository secret detection
+3. **SonarCloud**: Code quality analysis (main branch only)
+4. **Build**: Package validation and artifact generation
+5. **Release**: Automated semantic versioning (main branch only)
 
 ### 🧪 Python Package
 - **Click CLI Framework**: Professional command-line interface
@@ -153,6 +165,91 @@ export GITGUARDIAN_API_KEY=your_api_key_here
 **CI/CD Secrets** (configured in GitHub repository settings):
 - `GIT_GUARDIAN_API_KEY`: GitGuardian API key for CI pipeline
 - `SONAR_TOKEN`: SonarCloud integration token
+
+## Automated Guardrails & Quality Controls
+
+This repository implements comprehensive automated guardrails to ensure code quality, security, and reliability at every stage of development.
+
+### Pre-commit Checks (Local Protection)
+
+Every commit attempt triggers automated validation checks that **block the commit** if standards are not met:
+
+#### Security Scanning
+- **GitGuardian Secret Detection**: Scans staged changes for API keys, tokens, passwords, and certificates
+- **Immediate Feedback**: Developers know about security issues before code enters the repository
+
+#### Code Quality
+- **Black Code Formatting**: Automatically formats Python code to consistent style
+- **Flake8 Linting**: Enforces PEP 8 compliance and detects code quality issues
+- **Test Coverage**: Ensures 80% minimum coverage before allowing commits
+- **File Hygiene**: Removes trailing whitespace, ensures proper file endings
+
+#### Commit Standards
+- **Conventional Commits**: Validates commit message format for automated versioning
+- **YAML Validation**: Checks configuration files for syntax errors
+
+### CI Pipeline Re-validation (Clean Environment)
+
+The **"Lint and Test"** CI stage re-runs all pre-commit checks in a clean environment, providing additional value:
+
+#### Why Re-run Pre-commit Checks in CI?
+1. **Environment Consistency**: Validates that code works in clean, reproducible environment
+2. **Bypass Protection**: Catches issues when developers use `git commit --no-verify`
+3. **Dependency Verification**: Ensures all dependencies are properly declared
+4. **Cross-platform Validation**: Tests on different OS/Python versions than developer machines
+5. **Audit Trail**: Provides official record of quality compliance for compliance/governance
+
+#### CI-Specific Benefits
+- **Artifact Generation**: Creates coverage reports for downstream analysis
+- **Parallel Execution**: Runs tests faster with CI resources
+- **Integration Testing**: Validates package installation and CLI functionality
+- **Documentation**: Maintains build logs and test reports
+
+### GitGuardian Repository History Scanning
+
+Beyond pre-commit secret detection, the CI pipeline includes comprehensive repository scanning:
+
+#### Full History Analysis
+- **Complete Git History**: Scans every commit, branch, and file in repository history
+- **Historical Secrets**: Detects secrets that were committed and later removed
+- **Commit-by-Commit**: Identifies exactly which commits contain secrets
+
+#### Why Scan History vs. Just Files?
+1. **Complete Coverage**: Files can be deleted but secrets remain in git history
+2. **Compliance Requirements**: Many security standards require historical analysis
+3. **Incident Response**: Helps identify when secrets were introduced and their scope
+4. **Supply Chain Security**: Ensures no secrets exist anywhere in the codebase lifecycle
+
+#### Technical Implementation
+```bash
+# Current files only (limited protection)
+ggshield secret scan path . --recursive
+
+# Complete history (comprehensive protection)
+ggshield secret scan repo .
+```
+
+### Pipeline Failure Handling
+
+The CI pipeline implements strict failure handling:
+
+- **Sequential Execution**: Each stage waits for previous stage completion
+- **Fast Failure**: Pipeline stops immediately when any stage fails
+- **No Partial Deployments**: Release only occurs if ALL quality gates pass
+- **Clear Feedback**: Detailed logs show exactly what failed and why
+
+### Quality Gate Integration
+
+#### SonarCloud Analysis (Main Branch)
+- **Code Quality Metrics**: Maintainability, reliability, security ratings
+- **Coverage Verification**: Validates 80% coverage requirement
+- **Technical Debt**: Identifies areas needing refactoring
+- **Security Hotspots**: Detects potential vulnerabilities
+
+#### Automated Release Gates
+- **Version Calculation**: Based on conventional commit analysis
+- **Changelog Generation**: Automatic release notes from commit history
+- **Artifact Publishing**: Only occurs after all quality gates pass
 
 ## Test Coverage Enforcement
 
