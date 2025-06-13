@@ -55,7 +55,6 @@ class TestAcronymCreator:
         result = self.creator.create_basic_acronym(phrase, options)
         assert result == "HW"  # First letters are naturally uppercase
 
-    @pytest.mark.skip(reason="Word length filtering not implemented yet")
     def test_create_basic_acronym_min_word_length(self):
         """Test filtering words by minimum length."""
         phrase = "A Big Red Car"
@@ -63,7 +62,6 @@ class TestAcronymCreator:
         result = self.creator.create_basic_acronym(phrase, options)
         assert result == "BRC"  # 'A' should be filtered out
 
-    @pytest.mark.skip(reason="Max words limiting not implemented yet")
     def test_create_basic_acronym_max_words(self):
         """Test limiting number of words."""
         phrase = "One Two Three Four Five"
@@ -71,21 +69,18 @@ class TestAcronymCreator:
         result = self.creator.create_basic_acronym(phrase, options)
         assert result == "OTT"
 
-    @pytest.mark.skip(reason="Phrase cleaning not implemented yet")
     def test_clean_phrase_special_characters(self):
         """Test phrase cleaning removes special characters."""
         phrase = "Hello, World! How are you?"
         cleaned = self.creator.clean_phrase(phrase)
         assert cleaned == "Hello World How are you"
 
-    @pytest.mark.skip(reason="Phrase cleaning not implemented yet")
     def test_clean_phrase_extra_whitespace(self):
         """Test phrase cleaning normalizes whitespace."""
         phrase = "  Hello    World  "
         cleaned = self.creator.clean_phrase(phrase)
         assert cleaned == "Hello World"
 
-    @pytest.mark.skip(reason="Word extraction not implemented yet")
     def test_extract_words_basic(self):
         """Test word extraction from phrase."""
         phrase = "Hello Beautiful World"
@@ -93,7 +88,6 @@ class TestAcronymCreator:
         words = self.creator.extract_words(phrase, options)
         assert words == ["Hello", "Beautiful", "World"]
 
-    @pytest.mark.skip(reason="Article filtering not implemented yet")
     def test_extract_words_filter_articles(self):
         """Test word extraction filtering articles."""
         phrase = "The Quick Brown Fox"
@@ -101,7 +95,6 @@ class TestAcronymCreator:
         words = self.creator.extract_words(phrase, options)
         assert words == ["Quick", "Brown", "Fox"]
 
-    @pytest.mark.skip(reason="Word length filtering not implemented yet")
     def test_extract_words_min_length(self):
         """Test word extraction with minimum length filter."""
         phrase = "A Big Red Car"

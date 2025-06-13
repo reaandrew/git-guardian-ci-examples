@@ -2,6 +2,7 @@
 Core functionality for AcronymCreator.
 """
 
+import re
 from dataclasses import dataclass
 from typing import Optional
 
@@ -48,11 +49,12 @@ class AcronymCreator:
         if not phrase.strip():
             return ""
 
-        words = phrase.split()
+        # Use the extract_words method to get filtered words
+        words = self.extract_words(phrase, options)
 
-        # Filter out articles and common words if requested
-        if not options.include_articles:
-            words = [word for word in words if word.lower() not in self.COMMON_WORDS]
+        # Limit number of words if max_words is specified
+        if options.max_words is not None:
+            words = words[: options.max_words]
 
         acronym = "".join(word[0] for word in words)
 
@@ -60,3 +62,32 @@ class AcronymCreator:
             acronym = acronym.upper()
 
         return acronym
+
+    def clean_phrase(self, phrase: str) -> str:
+        """Clean a phrase by removing special characters and normalizing whitespace."""
+        # Remove special characters and punctuation, keep only letters,
+        # numbers, and spaces
+        cleaned = re.sub(r"[^\w\s]", "", phrase)
+
+        # Normalize whitespace - replace multiple spaces with single space and strip
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+
+        return cleaned
+
+    def extract_words(self, phrase: str, options: AcronymOptions) -> list:
+        """Extract words from a phrase based on the given options."""
+        if not phrase.strip():
+            return []
+
+        # Clean the phrase first
+        cleaned_phrase = self.clean_phrase(phrase)
+        words = cleaned_phrase.split()
+
+        # Filter out articles and common words if requested
+        if not options.include_articles:
+            words = [word for word in words if word.lower() not in self.COMMON_WORDS]
+
+        # Filter by minimum word length if specified
+        words = [word for word in words if len(word) >= options.min_word_length]
+
+        return words
