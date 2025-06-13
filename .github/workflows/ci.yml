@@ -59,10 +59,13 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: GitGuardian scan
-      uses: GitGuardian/ggshield/actions/secret@v1.40.0
+    - name: Install ggshield
+      run: pip install ggshield
+
+    - name: GitGuardian scan all files
       env:
         GITGUARDIAN_API_KEY: ${{ secrets.GIT_GUARDIAN_API_KEY }}
+      run: ggshield secret scan path . --recursive
 
   sonarcloud:
     name: SonarCloud
