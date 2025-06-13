@@ -1,3 +1,9 @@
+## [1.5.1](https://github.com/reaandrew/acronymcreator/compare/v1.5.0...v1.5.1) (2025-06-13)
+
+### Bug Fixes
+
+* improve SonarCloud quality gate handling and debugging ([4d2f8ab](https://github.com/reaandrew/acronymcreator/commit/4d2f8ab2f4c0400ab9787a6f878bb93e8ea0decf))
+
 ## [1.5.0](https://github.com/reaandrew/acronymcreator/compare/v1.4.0...v1.5.0) (2025-06-13)
 
 ### Features
