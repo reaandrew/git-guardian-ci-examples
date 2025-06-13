@@ -91,3 +91,42 @@ class AcronymCreator:
         words = [word for word in words if len(word) >= options.min_word_length]
 
         return words
+
+    def create_syllable_acronym(self, phrase: str, options: AcronymOptions) -> str:
+        """Create a syllable-based acronym by taking syllables from each word."""
+        if not phrase.strip():
+            return ""
+
+        words = self.extract_words(phrase, options)
+
+        # Limit number of words if max_words is specified
+        if options.max_words is not None:
+            words = words[: options.max_words]
+
+        syllables = []
+        for word in words:
+            # Syllable extraction: create 2-3 character syllables
+            if len(word) <= 2:
+                syllables.append(word)
+            elif len(word) <= 4:
+                # Short words: take first 2 characters
+                syllables.append(word[:2])
+            else:
+                # Longer words: take first 2-3 characters based on vowel patterns
+                vowels = "aeiouAEIOU"
+                if word[0] in vowels:
+                    # Word starts with vowel: take 3 chars
+                    syllables.append(word[:3])
+                elif len(word) >= 5 and word[1] in vowels:
+                    # Second char is vowel: take first 3 chars
+                    syllables.append(word[:3])
+                else:
+                    # Default: take first 2 chars
+                    syllables.append(word[:2])
+
+        acronym = "".join(syllables)
+
+        if options.force_uppercase:
+            acronym = acronym.upper()
+
+        return acronym

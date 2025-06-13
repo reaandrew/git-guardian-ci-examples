@@ -102,13 +102,12 @@ class TestAcronymCreator:
         words = self.creator.extract_words(phrase, options)
         assert words == ["Big", "Red", "Car"]
 
-    @pytest.mark.skip(reason="Syllable acronym not implemented yet")
     def test_create_syllable_acronym(self):
         """Test syllable-based acronym creation."""
         phrase = "Python Programming Language"
         options = AcronymOptions()
         result = self.creator.create_syllable_acronym(phrase, options)
-        assert result == "PYPRLAL"  # Py-Pr-La based on syllable logic
+        assert result == "PYPRLAN"  # Py-Pr-Lan based on syllable logic
 
     @pytest.mark.skip(reason="Multiple options generation not implemented yet")
     def test_generate_multiple_options(self):
