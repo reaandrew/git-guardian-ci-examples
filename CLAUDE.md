@@ -56,16 +56,18 @@ pre-commit run pytest --all-files
 ### Core Components
 
 **Security Pipeline**: Multi-layer validation
-1. **Local pre-commit**: GitGuardian ggshield scanning before commits
+1. **Local pre-commit**: GitGuardian ggshield scanning before commits (detects secrets in staged changes)
 2. **Test coverage enforcement**: Blocks commits with <80% code coverage
 3. **CI pre-commit job**: Re-runs all hooks including GitGuardian and tests
-4. **Conventional commits**: Enforced format for automated versioning
+4. **CI GitGuardian full scan**: Scans entire repository to catch commits that bypassed pre-commit (e.g., --no-verify)
+5. **Conventional commits**: Enforced format for automated versioning
 
-**CI/CD Workflow**: Four sequential jobs
+**CI/CD Workflow**: Five sequential jobs
 1. **lint-and-test**: Runs all quality checks, secret scanning, and tests with coverage
-2. **sonarcloud**: Code quality analysis with quality gate enforcement
-3. **build**: Basic validation and repository information
-4. **release**: Semantic versioning and GitHub release (main branch only)
+2. **gitguardian-scan**: Full repository secret scanning with ggshield (catches bypassed commits)
+3. **sonarcloud**: Code quality analysis with quality gate enforcement
+4. **build**: Basic validation and repository information
+5. **release**: Semantic versioning and GitHub release (main branch only)
 
 **Automated Versioning**: Uses conventional commits to determine version bumps
 - `feat:` → minor version (0.1.0 → 0.2.0)
@@ -195,6 +197,54 @@ If needed, you can manually check quality gate status:
 # Get project status
 curl -s -u "$SONAR_TOKEN:" \
   "https://sonarcloud.io/api/qualitygates/project_status?projectKey=reaandrew_acronymcreator"
+```
+
+## GitGuardian Secret Detection
+
+This repository implements comprehensive secret detection at multiple levels to prevent credentials from entering the codebase.
+
+### Pre-commit Secret Scanning
+
+**Local Protection**: GitGuardian ggshield runs on every commit attempt
+- Scans **staged changes only** (files being committed)
+- Detects API keys, tokens, passwords, certificates, and other secrets
+- Blocks commit if secrets are found
+- Part of the pre-commit hook chain that also includes linting and tests
+
+### CI Full Repository Scanning
+
+**Comprehensive Protection**: Dedicated GitGuardian stage in CI pipeline
+- Scans **entire repository** using `ggshield secret scan path . --recursive`
+- Catches commits that bypassed pre-commit hooks (e.g., using `--no-verify`)
+- Runs on all branches and pull requests for comprehensive coverage
+- Excludes `.git/**` directory to avoid false positives from temporary CI credentials
+
+### Two-Layer Security Model
+
+1. **Prevention**: Pre-commit hooks stop secrets at commit time
+2. **Detection**: CI scanning catches any secrets that slip through
+
+This dual approach ensures secrets cannot enter the repository through normal development workflows or emergency bypasses.
+
+### GitGuardian Configuration
+
+**Pre-commit Hook**:
+```yaml
+- repo: https://github.com/gitguardian/ggshield
+  hooks:
+    - id: ggshield
+      name: GitGuardian Shield
+```
+
+**CI Stage**:
+```yaml
+gitguardian-scan:
+  name: GitGuardian Full Repository Scan
+  steps:
+    - name: Install ggshield
+      run: pip install ggshield
+    - name: GitGuardian scan all files
+      run: ggshield secret scan path . --recursive --yes --exclude ".git/**"
 ```
 
 ## Commit Conventions
