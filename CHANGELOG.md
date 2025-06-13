@@ -1,3 +1,9 @@
+## [1.5.3](https://github.com/reaandrew/acronymcreator/compare/v1.5.2...v1.5.3) (2025-06-13)
+
+### Bug Fixes
+
+* explicitly exclude tests and setup.py from SonarCloud source analysis ([5d9d9b2](https://github.com/reaandrew/acronymcreator/commit/5d9d9b2d16478479e8ee3a6d20116c4e4f9340df))
+
 ## [1.5.2](https://github.com/reaandrew/acronymcreator/compare/v1.5.1...v1.5.2) (2025-06-13)
 
 ### Bug Fixes
