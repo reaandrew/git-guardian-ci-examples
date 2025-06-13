@@ -1,3 +1,10 @@
+## [1.5.0](https://github.com/reaandrew/acronymcreator/compare/v1.4.0...v1.5.0) (2025-06-13)
+
+### Features
+
+* implement multiple acronym options generation ([b68301b](https://github.com/reaandrew/acronymcreator/commit/b68301b4e4464d7d82281cf4c1a7004915a92e40))
+* implement syllable-based acronym generation ([7f11c2f](https://github.com/reaandrew/acronymcreator/commit/7f11c2f93cb160b5c029a44aa842aacff14db968))
+
 ## [1.4.0](https://github.com/reaandrew/acronymcreator/compare/v1.3.0...v1.4.0) (2025-06-13)
 
 ### Features
