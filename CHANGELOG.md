@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/reaandrew/acronymcreator/compare/v1.3.0...v1.4.0) (2025-06-13)
+
+### Features
+
+* implement word extraction and filtering functionality ([1794e8a](https://github.com/reaandrew/acronymcreator/commit/1794e8afe1a722b44c8005a3b31680195a828a9b))
+
 ## [1.3.0](https://github.com/reaandrew/acronymcreator/compare/v1.2.2...v1.3.0) (2025-06-13)
 
 ### Features
