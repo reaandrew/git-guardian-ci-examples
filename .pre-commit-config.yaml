@@ -30,10 +30,6 @@ repos:
     hooks:
       - id: ggshield
         name: GitGuardian Shield
-        entry: ggshield secret scan pre-commit
-        language: python
-        stages: [pre-commit]
-        types: [text]
 
   - repo: local
     hooks:
