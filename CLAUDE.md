@@ -63,11 +63,11 @@ pre-commit run pytest --all-files
 5. **Conventional commits**: Enforced format for automated versioning
 
 **CI/CD Workflow**: Five sequential jobs
-1. **lint-and-test**: Runs all quality checks, secret scanning, and tests with coverage
-2. **gitguardian-scan**: Full repository secret scanning with ggshield (catches bypassed commits)
-3. **sonarcloud**: Code quality analysis with quality gate enforcement
-4. **build**: Basic validation and repository information
-5. **release**: Semantic versioning and GitHub release (main branch only)
+1. **lint-and-test**: Re-runs all pre-commit checks in clean environment + comprehensive testing
+2. **gitguardian-scan**: Full repository history scanning with ggshield (catches bypassed commits + historical secrets)
+3. **sonarcloud**: Code quality analysis with quality gate enforcement (main branch only)
+4. **build**: Package validation and artifact generation
+5. **release**: Automated semantic versioning and GitHub release (main branch only)
 
 **Automated Versioning**: Uses conventional commits to determine version bumps
 - `feat:` → minor version (0.1.0 → 0.2.0)
@@ -239,12 +239,12 @@ This dual approach ensures secrets cannot enter the repository through normal de
 **CI Stage**:
 ```yaml
 gitguardian-scan:
-  name: GitGuardian Full Repository Scan
+  name: GitGuardian Repository History Scan
   steps:
     - name: Install ggshield
       run: pip install ggshield
-    - name: GitGuardian scan all files
-      run: ggshield secret scan path . --recursive --yes --exclude ".git/**"
+    - name: GitGuardian scan repository history
+      run: ggshield secret scan repo .
 ```
 
 ## Commit Conventions
