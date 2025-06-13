@@ -30,3 +30,4 @@ SOURCES.txt
 htmlcov/
 .coverage
 coverage.xml
+.cache_ggshield
