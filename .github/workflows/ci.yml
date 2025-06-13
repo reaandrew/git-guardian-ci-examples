@@ -65,7 +65,7 @@ jobs:
     - name: GitGuardian scan all files
       env:
         GITGUARDIAN_API_KEY: ${{ secrets.GIT_GUARDIAN_API_KEY }}
-      run: ggshield secret scan path . --recursive
+      run: ggshield secret scan path . --recursive --yes
 
   sonarcloud:
     name: SonarCloud
