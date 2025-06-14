@@ -2,10 +2,11 @@
 
 There are countless warnings and horror stories about "vibe coding"—that flow state where you're cranking out features and everything feels effortless. Sure, it looks productive and the code works, but the end result is often an unmaintainable, insecure, unreliable, and untested mess. But it works, for now. Vibe coding might sound like a trendy term, but it's really just developing software without automated checks and quality gates. Traditional engineering disciplines have always relied on safety measures and quality controls, so vibe coding should be no different in my honest opinion.
 
-![Development Flow Overview](docs/images/development-flow.png)
-*Figure 1: Automated guardrails enable confident vibe coding by catching issues automatically*
+![check-cycles.png](docs/images/check-cycles.png)
 
 ## Pre-commit Hooks: The First Line of Defense
+
+![pre-commit-checks.png](docs/images/pre-commit-checks.png)
 
 Pre-commit hooks are automated checks that run locally on your machine before code enters the repository. They're particularly crucial when working with AI coding assistants, which have transformed how we write code but can also introduce new challenges.
 
@@ -17,6 +18,8 @@ This creates a collaborative relationship where the AI handles the heavy lifting
 
 ## CI Pipeline: The Second Line of Defense
 
+![post-commit-checks.png](docs/images/post-commit-checks.png)
+
 While pre-commit hooks catch issues locally, the CI pipeline provides comprehensive validation in a clean, controlled environment. The multi-stage approach ensures that even if something bypasses local checks, it won't reach production.
 
 The pipeline runs progressive stages: basic linting and testing first, followed by comprehensive security scanning with GitGuardian's repository history analysis, then advanced quality analysis with SonarCloud and Semgrep security scanning. Each stage builds on the previous one, with failures stopping the pipeline immediately. This catches issues that might be missed locally due to environment differences, skipped pre-commit hooks, or complex integration problems that only surface during full builds.
@@ -25,13 +28,10 @@ For AI agents, the CI pipeline becomes even more powerful when they can query jo
 
 ## Automated Guardrails
 
-![Pre-commit Hooks Flow](docs/images/pre-commit-flow.png)
-*Figure 2: Pre-commit hooks catch issues before they enter the repository*
-
 Now let's examine the specific automated checks that form the backbone of a robust development workflow. The Acronym Creator project demonstrates each of these guardrails with real-world configurations that you can copy and adapt for your own projects. The repository can also be used as a repository template or as a reference to create other templates for different application types or languages.
 
 ### Secret Detection
-**Tools Used**: GitGuardian ggshield
+**Tools Used**: GitGuardian ggshield [https://www.gitguardian.com/ggshield](https://www.gitguardian.com/ggshield)
 
 GitGuardian automatically scans your code for accidentally committed passwords, API keys, and other sensitive information. This protection works at two levels: locally during commits and comprehensively in the CI pipeline.
 
@@ -101,7 +101,7 @@ The coverage enforcement works by requiring 80% of code lines to be tested, incl
 ### Security Analysis
 **Tools Used**: SonarCloud and Semgrep
 
-Security scanning tools like SonarCloud and Semgrep examine your code for common vulnerability patterns, code quality issues, and security hotspots, identifying potential problems before they reach production. These checks are only done in CI since they are not quick, and I have focused on keeping the pre-commit tests and checks to those which are relatively fast, so you can fail fast.
+Security scanning tools like SonarCloud and Semgrep examine your code for common vulnerability patterns, code quality issues, and security hotspots, identifying potential problems before they reach production. These checks are only done in CI since they are not as quick, and I have focused on keeping the pre-commit tests and checks to those which are relatively fast, so you can fail fast.
 
 ```yaml
 # SonarCloud integration
@@ -129,12 +129,6 @@ This project includes comprehensive automated guardrails. Every time I made chan
 
 ![CI Pipeline Structure](docs/images/ci-pipeline.png)
 *Figure 3: Multi-stage CI pipeline provides comprehensive validation*
-
-## Progressive Quality Gates
-
-The automation runs in multiple stages. First, basic checks like formatting and secret detection run locally before code even enters the repository. Then the CI system performs deeper analysis including security scanning and comprehensive test runs. Finally, quality gates ensure that only code meeting all standards can be deployed to production.
-
-The secret scanning is particularly thorough—it checks not just new code, but the entire repository history. This catches secrets that might have been committed months ago and later removed from current files, since git preserves the complete history of changes.
 
 ## Automated Release Management
 
