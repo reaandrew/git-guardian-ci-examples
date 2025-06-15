@@ -92,7 +92,7 @@ pre-commit run pytest --all-files
 
 **Required Environment Variables**:
 - `GITGUARDIAN_API_KEY`: For local GitGuardian scanning (get from GitGuardian Dashboard)
-- `GIT_GUARDIAN_API_KEY`: GitHub secret for CI/CD pipeline
+- `GITGUARDIAN_API_KEY`: GitHub secret for CI/CD pipeline
 - `SONAR_TOKEN`: GitHub secret for SonarCloud integration
 
 **Python Environment**: Always activate the virtual environment (`source venv/bin/activate`) when working locally.

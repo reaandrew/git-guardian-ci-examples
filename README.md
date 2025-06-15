@@ -162,8 +162,10 @@ graph LR
 export GITGUARDIAN_API_KEY=your_api_key_here
 ```
 
+> **Note**: GitGuardian CLI (`ggshield`) is included in the `dev` dependencies. For additional configuration options, see the [GitGuardian ggshield documentation](https://docs.gitguardian.com/ggshield-docs/configuration).
+
 **CI/CD Secrets** (configured in GitHub repository settings):
-- `GIT_GUARDIAN_API_KEY`: GitGuardian API key for CI pipeline
+- `GITGUARDIAN_API_KEY`: GitGuardian API key for CI pipeline
 - `SONAR_TOKEN`: SonarCloud integration token
 
 ## Automated Guardrails & Quality Controls

@@ -30,7 +30,7 @@ jobs:
 
     - name: Run lint and security checks
       env:
-        GITGUARDIAN_API_KEY: ${{ secrets.GIT_GUARDIAN_API_KEY }}
+        GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
       run: pre-commit run --all-files
 
     - name: Install dependencies

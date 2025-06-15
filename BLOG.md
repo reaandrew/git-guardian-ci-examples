@@ -76,7 +76,7 @@ GitGuardian automatically scans your code for accidentally committed passwords, 
 ```yaml
 - name: GitGuardian scan repository history
   env:
-    GITGUARDIAN_API_KEY: ${{ secrets.GIT_GUARDIAN_API_KEY }}
+    GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
   run: ggshield secret scan repo .
 ```
 
