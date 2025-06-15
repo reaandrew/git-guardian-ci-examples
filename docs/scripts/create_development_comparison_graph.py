@@ -1,5 +1,8 @@
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
+
+matplotlib.use("Agg")  # Use non-interactive backend
 
 # Generate feature numbers (x-axis)
 features = np.arange(1, 11)
@@ -89,8 +92,5 @@ plt.tight_layout()
 
 # Save the plot
 plt.savefig("../images/development-time-comparison.png", dpi=300, bbox_inches="tight")
-
-# Show the plot
-plt.show()
 
 print("Graph saved as '../images/development-time-comparison.png'")
