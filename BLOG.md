@@ -126,7 +126,7 @@ exclude_lines =
 
 The coverage enforcement works by requiring 80% of code lines to be tested, including branch coverage (testing both sides of if/else statements). The pre-commit hook uses a separate data file in `/tmp` to avoid modifying the working directory, and excludes common patterns like `__repr__` methods that don't need testing. If coverage drops below the threshold, the commit is blocked until more tests are added. Like the code quality checks, the CI pipeline runs the pre-commit tool again to re-validate all tests and coverage requirements.
 
-### Security Analysis
+### Code Quality and Security Analysis
 **Tools Used**: SonarCloud and Semgrep
 
 Security scanning tools like SonarCloud and Semgrep examine your code for common vulnerability patterns, code quality issues, and security hotspots, identifying potential problems before they reach production. These checks are only done in CI since they are not as quick, and I have focused on keeping the pre-commit tests and checks to those which are relatively fast, so you can fail fast.
@@ -190,6 +190,8 @@ For teams using premium LLMs or pay-as-you-go AI services, these guardrails also
 Without guardrails, development time compounds with each feature as the codebase becomes increasingly complex and fragile. What starts as quick feature additions gradually turns into a "whack-a-mole" scenario where fixing one issue creates two more. Each new feature takes longer to implement as developers must navigate around existing problems, leading to exponentially increasing development cycles.
 
 The goal isn't to restrict creativity or slow down development. It's to catch the common mistakes that happen when you're focused on solving hard problems, letting you maintain both speed and quality without having to constantly worry about the details that computers can handle automatically.
+
+By using this repository template for new projects, you skip the initial setup overhead and start right at the crossover point where guardrails are already paying dividends from day one.
 
 **The chart below is purely my opinion** and describes what you hear in the news about the results of not using guardrails, but I like it and I think it's effective in explaining the results and benefits of using guardrails:
 
