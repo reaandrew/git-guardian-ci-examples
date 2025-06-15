@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This repository demonstrates GitGuardian integration in CI/CD workflows to prevent secrets from entering codebases. It's designed as a template/example for teams implementing robust secret detection and automated release processes.
 
+### Documentation Files
+
+**Blog Content**: `/BLOG.md` - Main blog post about "Automated Guard Rails for Vibe Coding" that explains the project's security and automation concepts with practical examples.
+
 ## Development Commands
 
 ### Local Environment Setup
