@@ -50,6 +50,39 @@ python -m pytest --cov=src --cov-report=term-missing --cov-fail-under=80
 pre-commit run pytest --all-files
 ```
 
+## CRITICAL GIT WORKFLOW RULES
+
+**⚠️ NEVER PUSH WHEN PRE-COMMIT CHECKS FAIL ⚠️**
+
+**MANDATORY PRE-COMMIT WORKFLOW:**
+1. **ALWAYS** run `git commit` and let pre-commit hooks execute
+2. **IF PRE-COMMIT HOOKS FAIL** - STOP IMMEDIATELY
+3. **FIX ALL ISSUES** identified by the hooks
+4. **CHECK `git status`** - if hooks modified files, add and commit them
+5. **ONLY PUSH** after ALL pre-commit checks pass successfully
+
+**Pre-commit Hook Auto-Fixes:**
+- Hooks may automatically fix formatting, trailing whitespace, etc.
+- After auto-fixes, check `git status` for modified files
+- Stage and commit any files modified by hooks
+- Re-run hooks to ensure they pass
+
+**Example Workflow:**
+```bash
+# Make changes
+git add .
+git commit -m "your message"  # Pre-commit hooks run here
+
+# IF HOOKS FAIL - DO NOT PUSH!
+# Fix issues, then check for auto-fixes:
+git status  # Check if hooks modified files
+git add .   # Stage any auto-fixes
+git commit -m "style: fix pre-commit hook issues"
+
+# ONLY push after hooks pass:
+git push
+```
+
 ### Release Process
 - Releases are fully automated via semantic-release
 - Push to `main` branch triggers automatic versioning and GitHub release
