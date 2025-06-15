@@ -2,6 +2,8 @@
 
 There are countless warnings and horror stories about "vibe coding"—that flow state where you're cranking out features and everything feels effortless. Sure, it looks productive and the code works, but the end result is often an unmaintainable, insecure, unreliable, and untested mess. But it works, for now. Vibe coding might sound like a trendy term, but it's really just developing software without automated checks and quality gates. Traditional engineering disciplines have always relied on safety measures and quality controls, so vibe coding should be no different in my honest opinion.
 
+All source code and configurations for this project are available at [https://github.com/reaandrew/acronymcreator](https://github.com/reaandrew/acronymcreator).
+
 ## Real Example: Acronym Creator
 
 To demonstrate these concepts, I built a command-line tool that creates acronyms from phrases:
@@ -196,5 +198,3 @@ By using this repository template for new projects, you skip the initial setup o
 **The chart below is purely my opinion** and describes what you hear in the news about the results of not using guardrails, but I like it and I think it's effective in explaining the results and benefits of using guardrails:
 
 ![development-time-comparison.png](docs/images/development-time-comparison.png)
-
-

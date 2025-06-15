@@ -19,6 +19,7 @@ Thumbs.db
 
 # Pre-commit cache
 .pre-commit-cache/
+.pre-commit/
 
 # Build and distribution files
 build/
@@ -31,3 +32,9 @@ htmlcov/
 .coverage
 coverage.xml
 .cache_ggshield
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage cache files
+.coverage_precommit
