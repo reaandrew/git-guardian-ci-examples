@@ -1,3 +1,11 @@
+## [1.5.4](https://github.com/reaandrew/acronymcreator/compare/v1.5.3...v1.5.4) (2025-06-15)
+
+### Bug Fixes
+
+* exclude docs/scripts from SonarCloud coverage analysis ([2574c58](https://github.com/reaandrew/acronymcreator/commit/2574c58df0838b74abbb977fcfc08d34f2f5bb7c))
+* standardize GitGuardian API key environment variable name ([37458ec](https://github.com/reaandrew/acronymcreator/commit/37458ec007751287383ec21279319d3cc6c53653))
+* use non-interactive matplotlib backend in graph script ([6d071b4](https://github.com/reaandrew/acronymcreator/commit/6d071b40940068225da2ef96ea5275bb2fdd1035))
+
 ## [1.5.3](https://github.com/reaandrew/acronymcreator/compare/v1.5.2...v1.5.3) (2025-06-13)
 
 ### Bug Fixes
